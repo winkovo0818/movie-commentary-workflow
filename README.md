@@ -1,5 +1,7 @@
 # Movie Commentary Workflow
 
+[中文](README.md) | [English](README.en.md)
+
 一套面向 Codex 的电影解说生产工作流：由同一个总导演主脑持续完成全片理解、第一人称文稿、角色配音、选镜、渲染和复检，并用证据、状态锁和用户创意门槛保持结果可追溯。
 
 ## 项目定位
