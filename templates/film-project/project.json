@@ -3,6 +3,7 @@
   "schema_version": 1,
   "id": "replace-with-stable-film-id",
   "title": "Replace with film title",
+  "delivery_backend": "chatcut",
   "source": {
     "video": {
       "path": "/absolute/private/path/to/source.mp4",
@@ -11,8 +12,15 @@
     "subtitle": null
   },
   "media": {},
+  "chatcut": {
+    "timeline_name": "Replace with film title | Commentary",
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
   "paths": {
     "production_state": "production/state.json",
-    "director_memory": "DIRECTOR_MEMORY.md"
+    "director_memory": "DIRECTOR_MEMORY.md",
+    "chatcut_sync": "production/chatcut-sync.json"
   }
 }

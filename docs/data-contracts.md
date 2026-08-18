@@ -31,6 +31,18 @@ Schema：[visual-edit.schema.json](../schemas/visual-edit.schema.json)
 
 Schema：[audio-mix-plan.schema.json](../schemas/audio-mix-plan.schema.json)
 
+## ChatCut 时间线清单
+
+`chatcut-timeline-manifest.json` 由锁定导演方案确定性生成，保存帧级条目、素材需求、逻辑轨道、字幕计划和验证采样点。它不保存猜测的 ChatCut ID；素材映射不完整时 `ready=false`。
+
+Schema：[chatcut-timeline-manifest.schema.json](../schemas/chatcut-timeline-manifest.schema.json)
+
+## ChatCut 同步状态
+
+`production/chatcut-sync.json` 保存真实 ChatCut 项目、时间线、素材、轨道和条目映射，以及完成批次和结构/视觉验证状态。用户手工改动后标记 `USER_MODIFIED`，不得静默覆盖。
+
+Schema：[chatcut-sync.schema.json](../schemas/chatcut-sync.schema.json)
+
 ## 二次复检
 
 `review_issues.json` 保存成片指纹、两遍观看覆盖率、问题严重程度、时间码、证据、责任归属和复验状态。

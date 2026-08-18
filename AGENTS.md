@@ -8,6 +8,7 @@
 4. `production/state.json` 是正式采用状态的事实源。文件存在不等于采用，只有锁定记录有效。
 5. `DIRECTOR_MEMORY.md` 只保存跨窗口仍需要的剧情理解、用户审美、认可样片和失败教训。
 6. 开始任何阶段前先核对当前状态、输入路径和指纹，只继续未完成部分。
+7. `delivery_backend` 为 `chatcut` 时，使用 `movie-chatcut-timeline` 执行锁定导演方案；保持原始素材和轨道可编辑，不得用扁平化本地视频替代 ChatCut 时间线。
 
 ## 创作原则
 

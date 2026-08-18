@@ -35,6 +35,27 @@
       "additionalProperties": true
     },
     "canonical_project": {"type": "string", "minLength": 1},
+    "chatcut": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": [
+            "NOT_CONFIGURED",
+            "MANIFEST_READY",
+            "ASSETS_IMPORTED",
+            "TIMELINE_ASSEMBLED",
+            "VERIFIED",
+            "USER_MODIFIED",
+            "STALE",
+            "FAILED"
+          ]
+        },
+        "sync_path": {"type": "string", "minLength": 1},
+        "manifest_path": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": true
+    },
     "locks": {
       "type": "object",
       "required": [
@@ -72,6 +93,7 @@
                 "movie-voice-tts",
                 "movie-direct",
                 "movie-render-qa",
+                "movie-chatcut-timeline",
                 "movie-second-review",
                 "movie-batch-director"
               ]

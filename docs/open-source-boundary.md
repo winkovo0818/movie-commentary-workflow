@@ -21,7 +21,7 @@
 
 ```text
 Documents/
-├── movie-commentary-workflow/   # 公开代码仓库
+├── movie-commentary-workflow-chatcut/  # 公开代码仓库
 └── movie-projects-private/      # 不进入公开仓库
     ├── film-a/
     └── film-b/

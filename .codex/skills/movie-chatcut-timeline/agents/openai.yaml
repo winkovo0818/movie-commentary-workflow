@@ -1,0 +1,4 @@
+interface:
+  display_name: "电影解说 ChatCut 时间线"
+  short_description: "把锁定的电影解说导演方案同步为可验证、可续做的 ChatCut 可编辑时间线"
+  default_prompt: "使用 $movie-chatcut-timeline 把当前锁定的电影解说导演方案编译并同步到 ChatCut，保留可编辑轨道并完成结构与画面验证。"

@@ -11,6 +11,11 @@
     "master_skill": "movie-master-director"
   },
   "canonical_project": "project.json",
+  "chatcut": {
+    "status": "NOT_CONFIGURED",
+    "sync_path": "production/chatcut-sync.json",
+    "manifest_path": "production/chatcut-timeline-manifest.json"
+  },
   "locks": {
     "index": null,
     "script": null,

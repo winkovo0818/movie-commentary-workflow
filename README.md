@@ -1,18 +1,22 @@
-# Movie Commentary Workflow
+# Movie Commentary Workflow · ChatCut Edition
 
-一套面向 Codex 的电影解说生产工作流：由同一个总导演主脑持续完成全片理解、第一人称文稿、角色配音、选镜、渲染和复检，并用证据、状态锁和用户创意门槛保持结果可追溯。
+一套面向 Codex 的电影解说生产工作流：由同一个总导演主脑持续完成全片理解、第一人称文稿、角色配音、选镜、ChatCut 可编辑时间线和复检，并用证据、状态锁和用户创意门槛保持结果可追溯。
+
+本分支增加 ChatCut 执行层：把锁定的 `visual_edit.json` 与 `audio_mix_plan.json` 编译为确定性的时间线清单，再由 Codex 通过 ChatCut 官方工具导入原始素材、建立独立轨道、放置镜头、生成字幕并验证组合画面。用户可以随时进入 ChatCut 调整时间线、字幕、运动图形和声音。
 
 ## 项目定位
 
-当前 `v0.1` 是 **Skills Edition**，主要提供：
+当前 `v0.2` 是 **ChatCut Edition**，主要提供：
 
-- 8 个可组合的 Codex 技能；
+- 9 个可组合的 Codex 技能；
 - 从镜头索引到正式复检的状态机；
 - 项目、导演方案、混音和复检数据合同；
 - 千问、MiniMax、Fish Audio 与火山 ASR 的语音工具；
+- `visual_edit.json` / `audio_mix_plan.json` 到 ChatCut 时间线的确定性编译器；
+- 可续跑的 ChatCut 素材、轨道、条目和验证状态合同；
 - 项目模板、JSON Schema、安全扫描和状态校验。
 
-它不是一键生成器。索引、编导和渲染仍要求主脑观看连续原片并做创意判断；通用索引与渲染执行器会在后续版本继续抽取。
+它不是无人监督的一键生成器。索引和编导仍要求主脑观看连续原片并做创意判断；ChatCut 适配器负责忠实执行已经锁定的方案，不替总导演选择镜头。
 
 ## 核心原则
 
@@ -91,6 +95,7 @@ python scripts/validate_project.py examples/synthetic-demo
 | `movie-first-person-writer` | 全片理解与第一人称文稿 |
 | `movie-voice-tts` | 试音、整篇旁白和时间戳 |
 | `movie-direct` | 文稿预审、叙事节拍、画面与声音方案 |
+| `movie-chatcut-timeline` | 把锁定方案同步成可编辑 ChatCut 时间线并验证 |
 | `movie-render-qa` | 忠实渲染和技术验收 |
 | `movie-second-review` | 正式成片两遍隔离复检 |
 | `movie-batch-director` | 用户明确要求时生成隔离候选 |
@@ -98,6 +103,15 @@ python scripts/validate_project.py examples/synthetic-demo
 ## 隐私与版权边界
 
 本仓库不包含电影原片、字幕、剧照、证据帧、成片、声音参考、克隆音色、模型权重、API 密钥或真实项目状态。真实项目默认保存在仓库外，并只处理你有权使用的素材。
+
+编译 ChatCut 清单：
+
+```bash
+python .codex/skills/movie-chatcut-timeline/scripts/compile_chatcut_timeline.py \
+  --visual-edit /path/to/visual_edit.json \
+  --audio-mix-plan /path/to/audio_mix_plan.json \
+  --output /path/to/chatcut-timeline-manifest.json
+```
 
 提交代码前运行：
 

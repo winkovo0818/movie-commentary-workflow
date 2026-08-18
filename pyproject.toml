@@ -3,9 +3,9 @@ requires = ["setuptools>=75"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "movie-commentary-workflow"
-version = "0.1.0"
-description = "Auditable Codex skills and data contracts for first-person movie commentary production"
+name = "movie-commentary-workflow-chatcut"
+version = "0.2.0"
+description = "Auditable Codex movie commentary workflow with an editable ChatCut timeline backend"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }
