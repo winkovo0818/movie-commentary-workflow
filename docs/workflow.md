@@ -12,11 +12,11 @@
 | `VOICE_LOCKED` | 用户 + `movie-voice-tts` | 入选供应商和音色 | 用户明确选中试音 |
 | `NARRATION_LOCKED` | `movie-voice-tts` | 完整旁白、时间戳、SRT | 文稿指纹与音频文本一致 |
 | `DIRECTOR_PROXY_PLAN_LOCKED` | `movie-direct` | 样片画面与混音方案 | 时间轴和关键事实检查通过 |
-| `DIRECTOR_PROXY_RENDERED` | `movie-render-qa` | 可播放样片、基础技术报告 | 能播放且无阻断技术错误 |
+| `DIRECTOR_PROXY_RENDERED` | `movie-chatcut-timeline` 或 `movie-render-qa` | 可播放 ChatCut 时间线或样片、基础技术报告 | 能播放且无阻断技术错误 |
 | `USER_CREATIVE_REVIEW` | 总导演 + 用户 | 观看结论 | 每版最多一次内部集中修正 |
 | `USER_SAMPLE_APPROVED` | 用户 | 明确认可记录 | 才可扩展正式全片 |
 | `DIRECTOR_PLAN_LOCKED` | `movie-direct` | 正式画面与声音方案 | 全片拼接版完整观看通过 |
-| `FINAL_RENDERED` | `movie-render-qa` | 正式成片、技术报告 | 正式技术验收通过 |
+| `FINAL_RENDERED` | `movie-chatcut-timeline` + `movie-render-qa` | 正式 ChatCut 时间线、成片、技术报告 | 正式技术验收通过 |
 | `SECOND_REVIEW` | `movie-second-review` | 两遍看片记录、切点清单 | 所有问题已定位和归责 |
 | `SECOND_REVIEW_PASS` | `movie-second-review` | 复检通过记录 | 阻断问题全部复验通过 |
 | `FINAL_VERIFIED` | 总导演 | 最终状态锁 | 创意、方案、成片和复检一致 |
@@ -42,6 +42,19 @@
 7. 正常速度完整观看；
 8. 只集中修正 A级事实错误和明显节奏问题一次；
 9. 立即交给用户判断。
+
+## ChatCut 执行路径
+
+1. 编导锁定样片或正式 `visual_edit.json` 与 `audio_mix_plan.json`；
+2. `movie-chatcut-timeline` 编译素材需求和帧级执行清单；
+3. 导入原始素材并登记真实 ChatCut 素材 ID；
+4. 新建独立时间线和画面、旁白、原声、音乐轨；
+5. 每批条目先校验再提交，并持续记录同步状态；
+6. 启用以旁白轨为明确来源的字幕；
+7. 读取时间线结构并检查组合画面像素；
+8. 将通过验证的可编辑时间线交给用户；
+9. 用户手工调整后，由总导演决定吸收为新版方案或恢复锁定方案；
+10. 只有用户要求最终文件时才从 ChatCut 导出。
 
 ## 原片接管叙事
 

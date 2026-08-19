@@ -7,6 +7,8 @@ description: 忠实执行已锁定的电影解说样片或正式导演方案，�
 
 渲染岗位只执行创意，不决定创意。样片阶段追求快速、可靠、可观看；正式成片阶段执行完整技术验收。
 
+项目 `delivery_backend` 为 `chatcut` 时，先使用 `movie-chatcut-timeline` 建立可编辑时间线。本技能只验收 ChatCut 时间线或其正式导出，不得用本地 FFmpeg 预先生成扁平化主交付物来替代 ChatCut 工程。
+
 ## 读取输入
 
 1. 读取 `AGENTS.md`、项目状态、导演方案、旁白、时间戳和字幕。

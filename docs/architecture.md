@@ -15,7 +15,7 @@
     ↓
 状态、锁与数据合同
     ↓
-媒体、模型和供应商适配器
+媒体、模型、供应商和 ChatCut 适配器
 ```
 
 ### 1. 用户创意门槛
@@ -51,7 +51,15 @@ film-project/
 
 ### 4. 外部适配器
 
-外部能力包括 `ffmpeg`、PySceneDetect、视觉模型、TTS 和 ASR。适配器只返回坐标、证据或媒体产物，不能自动升级为剧情真相或创意决定。
+外部能力包括 `ffmpeg`、PySceneDetect、视觉模型、TTS、ASR 和 ChatCut。适配器只返回坐标、证据、媒体产物或忠实执行的时间线，不能自动升级为剧情真相或创意决定。
+
+ChatCut 集成使用三层事实：
+
+1. `visual_edit.json` 与 `audio_mix_plan.json` 保存创意决定；
+2. `chatcut-timeline-manifest.json` 保存由锁定方案确定性生成的执行清单；
+3. `production/chatcut-sync.json` 保存 ChatCut 项目、时间线、素材、轨道、条目和验证 ID。
+
+运行时 ID 不得写回导演方案。用户在 ChatCut 的手工调整也不得被静默覆盖；总导演先决定是否把调整吸收为新版导演方案。
 
 ## 证据与责任
 

@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/movie-commentary-workflow/chatcut-timeline-manifest.schema.json",
+  "title": "ChatCut timeline execution manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "film_id",
+    "ready",
+    "source_locks",
+    "target",
+    "canvas",
+    "duration_frames",
+    "asset_requirements",
+    "track_specs",
+    "item_batches",
+    "caption_plan",
+    "verification"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": 1},
+    "film_id": {"type": "string", "minLength": 3},
+    "ready": {"type": "boolean"},
+    "source_locks": {
+      "type": "object",
+      "required": ["visual_edit", "audio_mix_plan"],
+      "additionalProperties": {"$ref": "#/$defs/file_lock"}
+    },
+    "target": {
+      "type": "object",
+      "required": ["timeline_name"],
+      "properties": {
+        "project_id": {"type": ["string", "null"]},
+        "timeline_id": {"type": ["string", "null"]},
+        "timeline_name": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "canvas": {
+      "type": "object",
+      "required": ["fps", "width", "height"],
+      "properties": {
+        "fps": {"enum": [24, 25, 30, 50, 60]},
+        "width": {"type": "integer", "minimum": 16},
+        "height": {"type": "integer", "minimum": 16}
+      },
+      "additionalProperties": false
+    },
+    "duration_frames": {"type": "integer", "minimum": 1},
+    "asset_requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "source", "type", "roles", "asset_id"],
+        "properties": {
+          "key": {"type": "string", "minLength": 1},
+          "source": {"type": "string", "minLength": 1},
+          "type": {"enum": ["video", "audio"]},
+          "roles": {"type": "array", "items": {"type": "string"}},
+          "asset_id": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "missing_assets": {"type": "array", "items": {"type": "string"}},
+    "missing_targets": {
+      "type": "array",
+      "items": {"enum": ["project_id", "timeline_id"]},
+      "uniqueItems": true
+    },
+    "track_specs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "type", "name", "role"],
+        "properties": {
+          "key": {"type": "string", "minLength": 1},
+          "type": {"enum": ["video", "audio"]},
+          "name": {"type": "string", "minLength": 1},
+          "role": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "item_batches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "validate_first", "items"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "validate_first": {"const": true},
+          "items": {"type": "array", "items": {"$ref": "#/$defs/item"}}
+        },
+        "additionalProperties": false
+      }
+    },
+    "manual_audio_events": {"type": "array", "items": {"type": "object"}},
+    "caption_plan": {"type": "object"},
+    "verification": {"type": "object"},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "file_lock": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    },
+    "item": {
+      "type": "object",
+      "required": [
+        "binding_id",
+        "type",
+        "asset_ref",
+        "track_ref",
+        "fromFrame",
+        "durationInFrames",
+        "sourceStartFromInSeconds"
+      ],
+      "properties": {
+        "binding_id": {"type": "string", "minLength": 1},
+        "type": {"enum": ["video", "audio"]},
+        "asset_ref": {"type": "string", "minLength": 1},
+        "track_ref": {"type": "string", "minLength": 1},
+        "fromFrame": {"type": "integer", "minimum": 0},
+        "durationInFrames": {"type": "integer", "minimum": 1},
+        "sourceStartFromInSeconds": {"type": "number", "minimum": 0},
+        "playbackRate": {"type": "number", "exclusiveMinimum": 0},
+        "fit": {"enum": ["cover", "contain"]},
+        "decibelAdjustment": {"type": "number"},
+        "editorial": {"type": "object"}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

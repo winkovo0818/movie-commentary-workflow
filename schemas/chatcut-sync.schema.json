@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/movie-commentary-workflow/chatcut-sync.schema.json",
+  "title": "ChatCut synchronization state",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "film_id",
+    "status",
+    "project_id",
+    "timeline_id",
+    "manifest_sha256",
+    "asset_bindings",
+    "track_bindings",
+    "item_bindings",
+    "completed_batches"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": 1},
+    "film_id": {"type": "string", "minLength": 3},
+    "status": {
+      "enum": [
+        "MANIFEST_READY",
+        "ASSETS_IMPORTED",
+        "TIMELINE_ASSEMBLED",
+        "VERIFIED",
+        "USER_MODIFIED",
+        "STALE",
+        "FAILED"
+      ]
+    },
+    "project_id": {"type": "string", "minLength": 1},
+    "timeline_id": {"type": "string", "minLength": 1},
+    "manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "asset_bindings": {"type": "object", "additionalProperties": {"type": "string"}},
+    "track_bindings": {"type": "object", "additionalProperties": {"type": "string"}},
+    "item_bindings": {"type": "object", "additionalProperties": {"type": "string"}},
+    "completed_batches": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "last_error": {"type": ["string", "null"]},
+    "user_changes": {"type": "array", "items": {"type": "object"}},
+    "verification": {
+      "type": "object",
+      "properties": {
+        "structural_pass": {"type": "boolean"},
+        "visual_pass": {"type": "boolean"},
+        "verified_at": {"type": "string", "format": "date-time"}
+      },
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "additionalProperties": true
+}

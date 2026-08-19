@@ -22,6 +22,17 @@
     "title_zh": {"type": "string", "minLength": 1},
     "title_original": {"type": "string", "minLength": 1},
     "year": {"type": "integer", "minimum": 1888, "maximum": 2200},
+    "delivery_backend": {"enum": ["local-render", "chatcut"]},
+    "chatcut": {
+      "type": "object",
+      "properties": {
+        "timeline_name": {"type": "string", "minLength": 1},
+        "fps": {"enum": [24, 25, 30, 50, 60]},
+        "width": {"type": "integer", "minimum": 16},
+        "height": {"type": "integer", "minimum": 16}
+      },
+      "additionalProperties": true
+    },
     "canonical_root": {"type": "string", "minLength": 1},
     "source": {
       "type": "object",

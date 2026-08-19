@@ -238,8 +238,8 @@ wheels = [
 ]
 
 [[package]]
-name = "movie-commentary-workflow"
-version = "0.1.0"
+name = "movie-commentary-workflow-chatcut"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "jsonschema" },
